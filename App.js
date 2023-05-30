@@ -1,7 +1,7 @@
-//funcao do react para lembrar algo
+//react function to remember something
 import { useState } from "react";
 
-//funcao que comanda todos os botoes do board
+//function that controls all the buttons on the board
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
@@ -10,9 +10,9 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-//funcao inicial e principal
+//initial and main function
 function Board({ xIsNext, squares, onPlay }) {
-  //calcula o vencedor e de quem sera a proxima jogada
+  //calculates the winner and whose next move will be
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -25,7 +25,7 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     onPlay(nextSquares);
   }
-  //calculando o vencedor
+  //calculates the winner
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -33,7 +33,7 @@ function Board({ xIsNext, squares, onPlay }) {
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
-  //os botoes do tabuleiro
+  //the board buttons
   return (
     <>
       <div className="status">{status}</div>
@@ -62,7 +62,7 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
-  //funcao que salva os movimentos
+  //function that saves movements
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
@@ -73,7 +73,7 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  //exibe os movimentos
+  //displays the movements
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
@@ -100,7 +100,7 @@ export default function Game() {
   );
 }
 
-//funcao que calcula o ganhador
+//function that calculates the winner
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
